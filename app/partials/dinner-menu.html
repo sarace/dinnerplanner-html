@@ -12,8 +12,9 @@
         <div class="col-lg-2" ng-repeat="item in menu">
           <img ng-src="{{item.image}}">
           <p>{{item.title}}</p>
-          <p>{{item.instructions}}</p>
+          <p>DISH PRICE</p>
         </div>
+        <div><p>TOTAL PRICE {{getTotalMenuPrice()}}</p></div>
         <div class="col-lg-2" id="1stdish"></div>
         <div class="col-lg-2" id="2nddish"></div>
         <div class="col-lg-2" id="3rddish"></div>

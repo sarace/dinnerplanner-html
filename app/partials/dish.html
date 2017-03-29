@@ -29,7 +29,8 @@ Instructions, Ingredients and total cost. -->
 			<td>{{item.amount*getNumberOfGuests()}}</td>
 			<td>{{item.unit}}</td>
 			<td>{{item.name}}</td>
-			<td>{{item.amount*getNumberOfGuests()}} SEK</td>
+			<td>SEK</td>
+			<td>{{item.amount*getNumberOfGuests()}}</td>
 		</tr>
 		</table>
 		<p>Total price: {{getDishPrice(dish)*getNumberOfGuests()}} SEK</p>

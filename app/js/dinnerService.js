@@ -105,7 +105,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   //Returns all ingredients for all the dishes on the menu.
   this.getAllIngredients = function () {
-    var ourMenu = this.getFullMenu();
+    var ourMenu = this.getDinnerMenu();
     var ourIngredients = [];
     for (var i = 0; i < ourMenu.length; i++) {
       ourIngredients.push(ourMenu[i].ingredients)
@@ -127,10 +127,10 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
     return this.totalPrice;
   };
 
+  var ingredients = [];
 
   this.getDishPrice = function (dish) {
     var totalDishPrice = 0;
-    var ingredients = [];
     var ingredients = dish.extendedIngredients;
     for (var i = 0; i < ingredients.length; i++) {
       totalDishPrice += ingredients[i].amount;
@@ -173,9 +173,8 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   };
 
   this.getDinnerMenu = function () {
-    console.log("hejhej");
     return dinnerMenu;
-  }
+  };
 
 
   this.removeDishFromMenu = function (id) {
@@ -186,6 +185,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
       }
     }
   };
+    
 
   //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
   //you can use the filter argument to filter out the dish by name or ingredient (use for search)
