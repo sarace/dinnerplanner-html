@@ -26,6 +26,9 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
     <script src="js/dinnerCtrl.js"></script>
     <script src="js/dishCtrl.js"></script>
 
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="style.css">
+
   </head>
   <body>
     <!-- Here in index.html you should put only the layout that is shared among all the screens (e.g. header
@@ -33,7 +36,16 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
 
     <!-- ng-view Angular directive is where the partials will be loaded. app.js configures the $routingProvider
     where you specify which partial should be loaded when. -->
+    <div id="header">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>HOMELETTE <small>From the best chefs in the world directly into your kitchen</small></h1>
+            </div>
+        </div>
+    </div>
+
     <div ng-view></div>
+
 
   </body>
 </html>

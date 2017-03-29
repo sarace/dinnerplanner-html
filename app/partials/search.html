@@ -1,5 +1,32 @@
-<!-- We include the sidebar as it is shared across two screens. -->
 <ng-include src="'partials/dinner-sidebar.html'" ng-controller="DinnerCtrl"></ng-include>
 
+<!-- We include the sidebar as it is shared across two screens. -->
 <!-- TODO in Lab 5: Display the input box for search (you can ignore the type dropdown since BigOven does
 not support it in free version) and list all the dishes that match the search. -->
+
+	<div class="col-lg-9" id="pageHeader">
+		<h4>SELECT DISH</h4>
+		<div class="col-lg-5">
+		<div class="form-group, search">
+			<input ng-model="query" type="text" class="form-control" id="searchDish">
+		</div>
+		<button class="btn btn-warning" id="searchButton" ng-click="search(query, type)">search</button>
+	</div>
+	<div class="col-lg-3">
+		<div class="form-group">
+			<select class="form-control" id="selectMealType" ng-model="type">
+				<option value="starter">Starter</option>
+				<option value="main dish">Main</option>
+				<option value="dessert">Dessert</option>
+			</select>
+		</div>
+	</div>
+	<div class="row" id="selectedDishes">
+		<p>{{status}}</p>
+		<div ng-repeat="dish in dishes">
+			<img ng-src="https://spoonacular.com/recipeImages/{{dish.image}}">
+			<p>{{dish.title}}</p>
+			<p>Dish ready in {{dish.readyInMinutes}} minutes</p>	
+			<a href="#!/dish/{{dish.id}}">View dish</a>
+		</div>
+	</div>
