@@ -54,7 +54,7 @@ dinnerPlannerApp.config(['$routeProvider',
       }).
       when('/dinner-ingredients', {
         templateUrl: 'partials/dinner-ingredients.html',
-        controller: 'IngredientsCtrl'
+        controller: 'DinnerCtrl'
       }).
       // TODO in Lab 5: add more conditions for the last two screens (overview and preparation)
       otherwise({

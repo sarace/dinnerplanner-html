@@ -19,7 +19,7 @@ dinnerPlannerApp.controller('DinnerCtrl', function ($scope,Dinner) {
     return Dinner.getDinnerMenu();
   }
 
-  $scope.getDishPrice = function(dish) {
+  $scope.getDishPrice = function(dishh) {
     return Dinner.getDishPrice(dish);
   }
 

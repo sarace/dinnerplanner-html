@@ -177,16 +177,14 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
     return dinnerMenu;
   }
 
-  //Removes dish from menu
+
   this.removeDishFromMenu = function (id) {
-    var ourMenu = this.getFullMenu();
+    var ourMenu = this.getDinnerMenu();
     for (var i = 0; i < ourMenu.length; i++) {
       if (String(ourMenu[i].id) === id) {
-        this.dinnerOptions.splice(i, 1);
+        this.dinnerMenu.splice(i, 1);
       }
     }
-    console.log(this.dinnerOptions);
-    this.notify("dishRemoved");
   };
 
   //function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")

@@ -8,6 +8,17 @@
           			</div>
 				</div>
 				<div class="row">
+				<div ng-repeat="item in menu">
+					<p>{{item.title}}</p>
+					<tr>
+						<td ng-repeat="item in menu">
+							<img ng-src="{{item.image}}">
+							{{item.unit}}
+							{{item.amount}}
+							{{item.instructions}}
+						</td>
+					</tr>
+				</div>
 		        <div class="row recipe" style="margin-top: 5%; margin-left: 5%">
 		        <div class="col-lg-1"></div>
 		        <div class="col-lg-2" id="dishImage1"></div>
