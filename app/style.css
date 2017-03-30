@@ -256,10 +256,8 @@ p {
 #selectedDishes {
 
 	width: 100%;
-	display: inline-block;
 	margin-left: 0px;
 	margin-right: 0px;
-	text-align: center;
 }
 
 /*VIEW 6*/
@@ -271,29 +269,23 @@ p {
 
 #selectedDishes img{
 	border-radius: 8px;
-	width: 250;
-	height: 250px;
-	margin-top: 5%;
-	margin-bottom: 5%;
-}
-
-#selectedDishes .col-lg-3{
-	height: 300px;
-	text-align: center;
-	border: 5px solid;
-	border-color: white;
-	background-color: snow;
+	
 }
 
 .dishSearch {
-
+	margin-top: 5%;
+	margin-bottom: 5%;
 	display: inline-block;
-	margin-right: 10px;
-	margin-left: 10px;
+	margin-left: 20px;
+	width: 270px;
 }
 
 img {
 
 	width: 250px;
 	height: 250px;
+}
+
+.dishTitle {
+	font-weight: bold;
 }

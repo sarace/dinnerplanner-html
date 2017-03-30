@@ -20,15 +20,19 @@ not support it in free version) and list all the dishes that match the search. -
 				<option value="dessert">Dessert</option>
 			</select>
 		</div>
-	</div>
+	</div> 
+<div class="ng-scope">
 	<div class="row" id="selectedDishes">
+	<div class="col-lg-9">
 		<p>{{status}}</p>
 		<div ng-repeat="dish in dishes" class="dishSearch">
 			<div class="imgContainer">
 				<img ng-src="https://spoonacular.com/recipeImages/{{dish.image}}">
 			</div>
-			<p>{{dish.title}}</p>
+			<p class="dishTitle">{{dish.title}}</p>
 			<p>Dish ready in {{dish.readyInMinutes}} minutes</p>	
 			<a href="#!/dish/{{dish.id}}">View dish</a>
 		</div>
+		</div>
+	</div>
 	</div>

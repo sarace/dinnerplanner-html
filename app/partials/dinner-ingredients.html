@@ -7,11 +7,11 @@
 			</h2>
     	</div>
 	</div>
-	<div class="row recipe" ng-repeat="item in menu">
+	<div class="row recipe" ng-repeat="item in menu" style="margin-top: 3%;">
 		<div class="col-lg-1"></div>
 		<div class="col-lg-3"><img ng-src="{{item.image}}"></div>
 		<div class="col-lg-2">
-			{{item.title}}
+			<h3 style="margin-top: 0px;">{{item.title}}</h3>
 		</div>
 		<div class="col-lg-5">{{item.instructions}}</div>
 	</div>
