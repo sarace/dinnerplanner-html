@@ -21,6 +21,9 @@ dinnerPlannerApp.controller('DishCtrl', function ($scope,$routeParams,Dinner) {
   	return Dinner.getDishPrice(dish);
   }
 
+ $scope.addCookies = function(dish) {
+    return Dinner.addCookies(dish);
+ }
 
 /*
  $scope.dish = "";

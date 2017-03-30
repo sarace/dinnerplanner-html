@@ -15,7 +15,6 @@
 			<tr ng-repeat="item in menu track by $index">
 			<td>{{item.title}}</td>
 			<td>{{getDishPrice(item)*getNumberOfGuests()}}</td>
-			<td>{{cookies}}</td>
 			</tr>
 		</table>
 		<div id="totalCost">Total cost {{getTotalMenuPrice()}}</div>

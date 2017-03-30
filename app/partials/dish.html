@@ -34,7 +34,7 @@ Instructions, Ingredients and total cost. -->
 		</tr>
 		</table>
 		<p>Total price: {{getDishPrice(dish)*getNumberOfGuests()}} SEK</p>
-		<button ng-click="addDishToMenu(dish)" class="btn btn-warning selectButton" id="confirm_dish">Confirm Dish</button>
+		<button ng-click="addDishToMenu(dish); addCookies(dish);" class="btn btn-warning selectButton" id="confirmDish">Confirm Dish</button>
 		<div class="ingredientsCost" id="ingredientsCost">
 		</div>
 	</div>

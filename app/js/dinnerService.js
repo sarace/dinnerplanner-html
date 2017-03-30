@@ -5,17 +5,27 @@
 // the next time.
 dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
   
-
-
-  var dinnerMenu = [];
-  var savedCookies = [];
-  var allCookieID = $cookieStore.get("savedCookies");
-  if (allCookieID == undefined) {
-    allCookieID = [];
+//get data
+this.DishSearch = $resource('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search',{},{
+  get: {
+    headers: {
+      'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
+    }
   }
+});
 
-  
-  console.log(allCookieID);
+this.Dish = $resource('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/:id/information',{},{
+  get: {
+    headers: {
+       'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
+    }
+  }
+});
+
+  this.addDishToMenu = function (dish) {
+    dinnerMenu.push(dish);
+    
+  };
 
   var numberOfGuest = $cookieStore.get("numberOfGuest");
 
@@ -26,7 +36,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
   this.setNumberOfGuests = function(num) {
   numberOfGuest = num;
   this.updateCookieGuests();
-  }
+  };
 
   this.getNumberOfGuests = function() {
     return numberOfGuest;
@@ -40,6 +50,7 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
   this.updateCookieMenu = function () {
     var savedCookies = this.getCookieMenu();
     $cookieStore.put("savedCookies", savedCookies);
+    console.log(savedCookies);
   };
 
   this.getDishPrice = function (dish) {
@@ -58,11 +69,9 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
   // you will need to modify the model (getDish and getAllDishes) 
   // a bit to take the advantage of Angular resource service
   // check lab 5 instructions for details
-
-  this.addDishToMenu = function (dish) {
-    dinnerMenu.push(dish);
-    console.log(dish.id);
+  this.addCookies = function (dish) {
     allCookieID.push(dish.id);
+    console.log(dish.id);
     this.updateCookieMenu();
   };
 
@@ -110,22 +119,24 @@ dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
     }
   };*/
 
-//get data
-this.DishSearch = $resource('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/search',{},{
-  get: {
-    headers: {
-      'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
-    }
-  }
-});
+  var dinnerMenu = [];
+  var savedCookies = [];
+  var allCookieID = $cookieStore.get("savedCookies");
+  
+  if (allCookieID == undefined) {
+    allCookieID = [];
+  }  else {
 
-this.Dish = $resource('https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/:id/information',{},{
-  get: {
-    headers: {
-       'X-Mashape-Key': 'Qu9grxVNWpmshA4Kl9pTwyiJxVGUp1lKzrZjsnghQMkFkfA4LB'
-    }
+  for (i in allCookieID) {
+    var theDish = this.Dish.get({id:allCookieID[i]});
+    this.addDishToMenu(theDish);
+    console.log(allCookieID[i]);
   }
-});
+
+  }
+
+  console.log(allCookieID);
+
 
   // Angular service needs to return an object that has all the
   // methods created in it. You can consider that this is instead
