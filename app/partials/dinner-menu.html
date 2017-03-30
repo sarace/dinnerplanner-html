@@ -1,30 +1,22 @@
 <div id="view5">
 	<div class="row" style="padding: 1%; background-color: #ffe680 ">
-		<div class='page-header'>
+		  <div class='page-header'>
 	        <h2>
 				<span id="numberOfGuests" style="padding: 2%">Number of guests: {{getNumberOfGuests()}}</span>
 				<a href="#!/search" class='btn btn-warning pull-right' id="backAndEditButton" style="margin-right: 2%">Go Back Edit Dinner</a>
 	        </h2>
 	     </div>
     </div>
-    <div class="row" style="margin-top: 3%; align-content: center">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-2" ng-repeat="item in menu">
+    <div class="row" style="margin-top: 3%; align-content: center" ng-repeat="item in menu track by $index">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-3">
           <img ng-src="{{item.image}}">
-          <p>{{item.title}}</p>
-          <p>DISH PRICE</p>
         </div>
-        <div><p>TOTAL PRICE {{getTotalMenuPrice()}}</p></div>
-        <div class="col-lg-2" id="1stdish"></div>
-        <div class="col-lg-2" id="2nddish"></div>
-        <div class="col-lg-2" id="3rddish"></div>
-        <div class="col-lg-2">
-        	<p id="totalprice"></p>
-   		</div>
+        <div class="col-lg-2"><h3>{{item.title}}</h3></div>
+        <div class="col-lg-2">{{getDishPrice(item)*getNumberOfGuests()}}</div>
+        <div class="col-lg-2"></div>
    	</div>
-    <div class="col-lg-1"></div>
-   	<div class="row">
-       	<div class="col-lg-5"></div>
-       	<a href="#!/dinner-ingredients" class="btn btn-warning" id=printButton style="margin-top: 7%; padding-left: 5%; padding-right: 5%">Print Full Recipe</a>
-    </div>
+    <div class="col-lg-1"><div><p>TOTAL PRICE {{getTotalMenuPrice()}}</p></div>
+        <a href="#!/dinner-ingredients" class="btn btn-warning" id=printButton style="margin-top: 7%; padding-left: 5%; padding-right: 5%">Print Full Recipe</a></div>
 </div>
+

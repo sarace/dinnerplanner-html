@@ -13,14 +13,13 @@
 			</tr>
 			<div id="test"></div>
 			<tr ng-repeat="item in menu track by $index">
-				<td>{{item.title}}</td>
-				<td>{{getDishPrice()}}</td>
+			<td>{{item.title}}</td>
+			<td>{{getDishPrice(item)*getNumberOfGuests()}}</td>
 			</tr>
 		</table>
-		<div id="totalCost">...</div>
+		<div id="totalCost">Total cost {{getTotalMenuPrice()}}</div>
 		<a href="#!/dinner-menu" class="btn-lg btn-warning centerBlock" id="confirmDinner">Confirm Dinner</a>
 	</div>
-
 
 <!-- Displaying number of guests both in input box and here is redundant. It is here only for the example
 purpose so you can see how some information from the model can be retrieved. In Lab 5 you will replace 

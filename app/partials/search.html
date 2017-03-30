@@ -10,7 +10,7 @@ not support it in free version) and list all the dishes that match the search. -
 		<div class="form-group, search">
 			<input ng-model="query" type="text" class="form-control" id="searchDish">
 		</div>
-		<button class="btn btn-warning" id="searchButton" ng-click="search(query, type)">search</button>
+		<button class="btn btn-warning" id="searchButton" ng-click="search(query,type)">search</button>
 	</div>
 	<div class="col-lg-3">
 		<div class="form-group">
@@ -23,8 +23,10 @@ not support it in free version) and list all the dishes that match the search. -
 	</div>
 	<div class="row" id="selectedDishes">
 		<p>{{status}}</p>
-		<div ng-repeat="dish in dishes">
-			<img ng-src="https://spoonacular.com/recipeImages/{{dish.image}}">
+		<div ng-repeat="dish in dishes" class="dishSearch">
+			<div class="imgContainer">
+				<img ng-src="https://spoonacular.com/recipeImages/{{dish.image}}">
+			</div>
 			<p>{{dish.title}}</p>
 			<p>Dish ready in {{dish.readyInMinutes}} minutes</p>	
 			<a href="#!/dish/{{dish.id}}">View dish</a>

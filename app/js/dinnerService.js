@@ -3,19 +3,58 @@
 // dependency on any service you need. Angular will insure that the
 // service is created first time it is needed and then just reuse it
 // the next time.
-dinnerPlannerApp.factory('Dinner',function ($resource) {
+dinnerPlannerApp.factory('Dinner',function ($resource,$cookieStore) {
   
-  var numberOfGuest = 2;
 
+
+  var dinnerMenu = [];
+  var savedMenu = [];
+
+  var numberOfGuest = $cookieStore.get("numberOfGuest");
+
+  if (numberOfGuest == undefined) {
+    numberOfGuest = 2;
+  };
 
   this.setNumberOfGuests = function(num) {
-    numberOfGuest = num;
+  numberOfGuest = num;
+  this.updateCookieGuests();
   }
 
   this.getNumberOfGuests = function() {
     return numberOfGuest;
   }
 
+  this.updateCookieGuests = function() {
+    $cookieStore.put("numberOfGuest", numberOfGuest);
+    cookieGuests = $cookieStore.get("numberOfGuest");
+  };
+
+  this.updateCookieMenu = function() {
+    menuToSave = this.getDinnerMenu();
+
+    for (var i = 0; i < menuToSave.length; i++) {
+       savedMenu.push(menuToSave[i].id)
+       $cookieStore.put("savedMenu", savedMenu);
+    }
+    
+    cookieMenu = $cookieStore.get("savedMenu");
+    console.log(cookieMenu)
+
+  };
+
+  this.getDishPrice = function (dish) {
+    var ingredients = dish.extendedIngredients;
+    var totalDishPrice = 0;
+    for (var i = 0; i < ingredients.length; i++) {
+      totalDishPrice += ingredients[i].amount;
+    }
+
+    return totalDishPrice;
+  
+  };
+
+  this.totalDishPrice = 0;
 
   // TODO in Lab 5: Add your model code from previous labs
   // feel free to remove above example code
@@ -23,121 +62,44 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
   // a bit to take the advantage of Angular resource service
   // check lab 5 instructions for details
 
-
-  this.numberOfGuests = 1;
-  this.dinnerOptions = [];
   this.resultOfSearch = "Starter";
-  this.dishToDisplay = "";
-  this.searchFoundValue = '';
 
-  //Lab 3
-  this._listeners = [];
-
-  this.attach = function (listener) {
-    this._listeners.push(listener);
+  this.addDishToMenu = function (dish) {
+    dinnerMenu.push(dish);
+    console.log(dish);
+    this.updateCookieMenu();
   };
 
-
-  this.notify = function (args) {
-    for (var i = 0; i < this._listeners.length; i++) {
-      //this._listeners[i](this, args);
-      this._listeners[i].update(args);
-    }
-
-  };
-
-  //in View 4 we want to display the ingredients of the dish that was selected in View3
-  this.getDishToDisplay = function () {
-    return this.dishToDisplay;
-  }
-
-  //in View 3 this tells the view whether we want to see starters, mains or desserts
-  this.getSelectedType = function () {
-    return this.resultOfSearch;
-  };
-
-  this.confirmDinner = function () {
-    this.notify("switchToView5")
-  };
-
-  this.printDinner = function () {
-    this.notify("switchToView6")
-  };
-
-
-  //depending on what we choose is View 3 this updates the variable that stores the starter/ main dish / dessert value
-  this.changeSelectedType = function (searchResult) {
-    this.resultOfSearch = searchResult;
-    this.notify("selectedTypeChanged");
-
-  };
-
-  this.setDisplayDishDetail = function (buttonClicked) {
-    currentDishes = this.getAllDishes(this.resultOfSearch);
-    this.dishToDisplay = currentDishes[buttonClicked - 1];
-    this.notify("switchToView4");
-  };
-
-  this.getDisplayDishDetail = function () {
-    return (this.dishToDisplay);
-  };
-
-  this.searchFoundFunction = function (searchValue) {
-    this.searchFoundValue = searchValue;
-    this.notify("searchFound");
-  };
-
-  this.searchDisplay = function () {
-    this.notify("searchDisplay");
-  };
-
-  //Returns the dish that is on the menu for selected type 
-  this.getSelectedDish = function (type) {
-    var ourMenu = this.getFullMenu();
-    var selected = [];
-    for (var i = 0; i < ourMenu.length; i++) {
-      if (ourMenu[i].type === type) {
-        selected.push(ourMenu[i])
-      }
-    }
-    return selected;
+  this.getDinnerMenu = function () {
+    console.log(dinnerMenu)
+    return dinnerMenu;
   };
 
   //Returns all ingredients for all the dishes on the menu.
   this.getAllIngredients = function () {
-    var ourMenu = this.getDinnerMenu();
+    var theMenu = this.getDinnerMenu();
+    console.log(theMenu);
     var ourIngredients = [];
-    for (var i = 0; i < ourMenu.length; i++) {
-      ourIngredients.push(ourMenu[i].ingredients)
+    for (var i = 0; i < theMenu.length; i++) {
+      ourIngredients.push(theMenu[i].extendedIngredients)
     }
+    console.log(ourIngredients);
     return ourIngredients;
   };
 
   //Returns the total get of the menu (all the ingredients multiplied by number of guests).
   this.getTotalMenuPrice = function () {
-    this.totalPrice = 0;
-    var guests = this.numberOfGuests;
-    var ourIngredients = this.getAllIngredients();
-    for (var i = 0; i < ourIngredients.length; i++) {
-      for (var j = 0; j < ourIngredients[i].length; j++) {
-        this.totalPrice = this.totalPrice + (ourIngredients[i][j].price) * guests;
+    var totalPrice = 0;
+    var guests = this.getNumberOfGuests();
+    var theIngredients = this.getAllIngredients();
+    console.log(theIngredients)
+    for (var i = 0; i < theIngredients.length; i++) {
+      for (var j = 0; j < theIngredients[i].length; j++) {
+        totalPrice = totalPrice + (theIngredients[i][j].amount) * guests;
       }
     }
 
-    return this.totalPrice;
-  };
-
-  var ingredients = [];
-
-  this.getDishPrice = function (dish) {
-    var totalDishPrice = 0;
-    var ingredients = dish.extendedIngredients;
-    for (var i = 0; i < ingredients.length; i++) {
-      totalDishPrice += ingredients[i].amount;
-    }
-
-    return (totalDishPrice);
-  
+    return totalPrice;
   };
   
   /*  //guests = this.numberOfGuests;
@@ -163,18 +125,6 @@ dinnerPlannerApp.factory('Dinner',function ($resource) {
 
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
-
-  dinnerMenu = [];
-
-  this.addDishToMenu = function (dish) {
-    console.log(dish);
-    dinnerMenu.push(dish);
-    console.log(dinnerMenu);
-  };
-
-  this.getDinnerMenu = function () {
-    return dinnerMenu;
-  };
 
 
   this.removeDishFromMenu = function (id) {

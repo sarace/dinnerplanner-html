@@ -18,6 +18,7 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     
     <!-- The application JavaScript code -->
     <script src="js/app.js"></script>
@@ -36,6 +37,7 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
 
     <!-- ng-view Angular directive is where the partials will be loaded. app.js configures the $routingProvider
     where you specify which partial should be loaded when. -->
+    <div id="wrapper">
     <div id="header">
         <div class="row">
             <div class="col-lg-12">
@@ -43,8 +45,10 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
             </div>
         </div>
     </div>
-
-    <div ng-view></div>
+    <div id="container">
+        <div ng-view></div>
+    </div>
+    </div>
 
 
   </body>
