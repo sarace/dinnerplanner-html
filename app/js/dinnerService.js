@@ -23,8 +23,7 @@ this.Dish = $resource('https://spoonacular-recipe-food-nutrition-v1.p.mashape.co
 });
 
   this.addDishToMenu = function (dish) {
-    dinnerMenu.push(dish);
-    
+        dinnerMenu.push(dish);
   };
 
   var numberOfGuest = $cookieStore.get("numberOfGuest");
@@ -69,9 +68,9 @@ this.Dish = $resource('https://spoonacular-recipe-food-nutrition-v1.p.mashape.co
   // you will need to modify the model (getDish and getAllDishes) 
   // a bit to take the advantage of Angular resource service
   // check lab 5 instructions for details
+
   this.addCookies = function (dish) {
     allCookieID.push(dish.id);
-    console.log(dish.id);
     this.updateCookieMenu();
   };
 
@@ -107,6 +106,17 @@ this.Dish = $resource('https://spoonacular-recipe-food-nutrition-v1.p.mashape.co
     return totalPrice;
   };
 
+  this.deleteDish = function (dish) {
+    var removeDish = dish.id;
+    var fromMenu = this.getCookieMenu();
+    for (var i = 0; i < fromMenu.length; i++) {
+      if (fromMenu[i] === removeDish) {
+          dinnerMenu.splice(i, 1);
+      }
+    }
+
+  };
+
   //Adds the passed dish to the menu. If the dish of that type already exists on the menu
   //it is removed from the menu and the new one added.
 
@@ -130,13 +140,9 @@ this.Dish = $resource('https://spoonacular-recipe-food-nutrition-v1.p.mashape.co
   for (i in allCookieID) {
     var theDish = this.Dish.get({id:allCookieID[i]});
     this.addDishToMenu(theDish);
-    console.log(allCookieID[i]);
   }
 
   }
-
-  console.log(allCookieID);
-
 
   // Angular service needs to return an object that has all the
   // methods created in it. You can consider that this is instead

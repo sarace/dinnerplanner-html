@@ -13,7 +13,7 @@
 			</tr>
 			<div id="test"></div>
 			<tr ng-repeat="item in menu track by $index">
-			<td>{{item.title}}</td>
+			<td ng-click="deleteDish(item);">{{item.title}}</td>
 			<td>{{getDishPrice(item)*getNumberOfGuests()}}</td>
 			</tr>
 		</table>
